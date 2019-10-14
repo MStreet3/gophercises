@@ -63,7 +63,6 @@ func main() {
 }
 
 func shuffleProblems(problems []problem) []problem {
-
 	shuffled := make([]problem, 0)
 	count := len(problems)
 	var k int
@@ -72,16 +71,15 @@ func shuffleProblems(problems []problem) []problem {
 		shuffled = append(shuffled, problems[k])
 		problems = append(problems[:k], problems[k+1:]...)
 	}
-
 	return shuffled
 }
 
 func parseLines(lines [][]string) []problem {
-	ret := make([]problem, len(lines))
+	problems := make([]problem, len(lines))
 	for i, line := range lines {
-		ret[i] = problem{q: line[0], a: strings.TrimSpace(line[1])}
+		problems[i] = problem{q: line[0], a: strings.TrimSpace(line[1])}
 	}
-	return ret
+	return problems
 }
 
 type problem struct {
