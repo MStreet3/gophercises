@@ -12,12 +12,19 @@ import (
 
 func main() {
 	yamlFileName := flag.String("yaml", "urls.yaml", "a yaml file describing shortened urls")
+	jsonFileName := flag.String("json", "urls.json", "a json file describing shortened urls")
 	flag.Parse()
 
 	yamlFile, err := ioutil.ReadFile(*yamlFileName)
 
 	if err != nil {
 		exit(fmt.Sprintf("Failed to open the YAML file: %s\n", *yamlFileName))
+	}
+
+	jsonFile, err := ioutil.ReadFile(*jsonFileName)
+
+	if err != nil {
+		exit(fmt.Sprintf("Failed to open the YAML file: %s\n", *jsonFileName))
 	}
 
 	mux := defaultMux()
@@ -35,8 +42,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// Build the JSONHandler
+	jsonHandler, err := urlshort.JSONHandler(jsonFile, yamlHandler)
+	if err != nil {
+		panic(err)
+	}
+
 	fmt.Println("Starting the server on :8080")
-	http.ListenAndServe(":8080", yamlHandler)
+	http.ListenAndServe(":8080", jsonHandler)
 }
 
 func defaultMux() *http.ServeMux {
