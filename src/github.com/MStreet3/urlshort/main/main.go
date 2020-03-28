@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"urlshort"
+	"github.com/MStreet3/urlshort"
 )
 
 func main() {
