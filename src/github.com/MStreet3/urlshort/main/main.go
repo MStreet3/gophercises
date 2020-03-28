@@ -24,7 +24,7 @@ func main() {
 	jsonFile, err := ioutil.ReadFile(*jsonFileName)
 
 	if err != nil {
-		exit(fmt.Sprintf("Failed to open the YAML file: %s\n", *jsonFileName))
+		exit(fmt.Sprintf("Failed to open the JSON file: %s\n", *jsonFileName))
 	}
 
 	mux := defaultMux()
